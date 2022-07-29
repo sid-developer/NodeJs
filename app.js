@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 const mongoose = require('mongoose');
-const mongodb = 'mongodb+srv://mongo_db_user:JCaSADXbB37xSYpn@cluster0.44acw.mongodb.net/?retryWrites=true&w=majority'
+const mongodb = 'mongodb+srv://mongo_db_user:<password>@cluster0.44acw.mongodb.net/?retryWrites=true&w=majority'
 
 mongoose.connect(mongodb).then( ()=> {console.log('connected')}).catch(err => {console.log('error')}) //connected mongodb using mongoose
 
