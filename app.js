@@ -6,7 +6,7 @@ const UserInfo = require('./models/user_info');
 const app = express();
 
 // const mongoose = require('mongoose');
-const mongodb = 'mongodb+srv://mongo_db_user:CWd9yA874sHLaxBM@cluster0.44acw.mongodb.net/?retryWrites=true&w=majority'
+const mongodb = 'mongodb+srv://mongo_db_user:<Password>@cluster0.44acw.mongodb.net/?retryWrites=true&w=majority'
 
 mongoose.connect(mongodb).then( ()=> {
 
