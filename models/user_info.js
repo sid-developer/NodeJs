@@ -10,7 +10,9 @@ const Schema = mongoose.Schema
             required: true
         }
 
+    },{
+        timestamps : true
     })
 
-const UserInfo = mongoose.model('user_info', ItemSchema);
+const UserInfo = mongoose.model('demo', ItemSchema, 'demo');
 module.exports = UserInfo

@@ -6,7 +6,7 @@ const UserInfo = require('./models/user_info');
 const app = express();
 
 // const mongoose = require('mongoose');
-const mongodb = 'mongodb+srv://mongo_db_user:<Password>@cluster0.44acw.mongodb.net/?retryWrites=true&w=majority'
+const mongodb = 'mongodb+srv://mongo_db_user:<Password>@cluster0.44acw.mongodb.net/DB1?retryWrites=true&w=majority'
 
 mongoose.connect(mongodb).then( ()=> {
 
@@ -39,10 +39,10 @@ app.get('/', (req, res) => {
     // res.sendFile('./views/index.html',{root:__dirname})
 
     const items = [
-        {name : 'SID', age : 31},
-        {name : 'Heena', age :31},
-        {name : 'Sudhir', age : 60},
-        {name : 'Swati', age : 56},
+        {name : 'A', age : 31},
+        {name : 'B', age :31},
+        {name : 'C', age : 60},
+        {name : 'D', age : 56},
     ]
 
     res.render('index', {items}); //render file using EJS
@@ -56,13 +56,15 @@ app.get('/add-item', (req,res) =>{
     })
 
     User_Info.save()
-    // .then((result)=>{
-    //     res.send(result)
-    // })
+    .then((result)=>{
+        res.send(result)
+    }).catch((err) =>{
+        console.log('Error '+err);
+    })
 
     // res.send('Its an another Request');
     // res.sendFile('./views/add-item.html',{root:__dirname})
-    res.render('add-item'); //render file using EJS
+    // res.render('add-item'); //render file using EJS
 });
 
 app.use((req,res) =>{
