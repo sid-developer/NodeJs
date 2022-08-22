@@ -1,0 +1,22 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "CRUD Practice",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sid-developer/NodeJs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sid-developer/NodeJs/issues"
+  },
+  "homepage": "https://github.com/sid-developer/NodeJs#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
