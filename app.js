@@ -1,8 +1,12 @@
 const express = require('express')
 const app = express()
 
+app.use(express.urlencoded({extended : true}));
+
 const mongoose = require('mongoose')
-const mongodb = ''
+const mongodb = 'mongodb+srv://mongo_db_user:<Password>@cluster0.5qiqpdd.mongodb.net/sample_db?retryWrites=true&w=majority'
+
+const user_schema = require('./models/user-schema');
 
 mongoose.connect(mongodb).then( () =>{
 
@@ -19,18 +23,29 @@ app.set('view engine','ejs')
 
 app.get('/', (req, res) => {
 
-    const items = [
-        {name : 'A', mob : 9858962589},
-        {name : 'B', mob : 9858962580},
-        {name : 'C', mob : 9808962580},
-        {name : 'D', mob : 9828962580},
-    ]
+    user_schema.find().then( (result) => {
+        res.render('index',{items : result})
+    }).catch( (err) =>{
+        res.send('Error:'+err);
+    })
 
-    res.render('index', {items : items})
+    
 })
 
 app.get('/add-item', (req, res) => {
     res.render('add-item')
+})
+
+app.post('/save-item', (req, res) =>{
+
+    // console.log(req.body);
+    const save_data = user_schema(req.body)
+    save_data.save().then( () =>{
+        res.redirect('/')
+    }).catch( (err) =>{
+        res.send('failed '+err);
+    })
+
 })
 
 app.use( (req, res) => {
