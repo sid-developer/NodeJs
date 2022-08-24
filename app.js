@@ -4,7 +4,7 @@ const app = express()
 app.use(express.urlencoded({extended : true}));
 
 const mongoose = require('mongoose')
-const mongodb = 'mongodb+srv://mongo_db_user:W85t2FUhQ9hcwBk2@cluster0.5qiqpdd.mongodb.net/sample_db?retryWrites=true&w=majority'
+const mongodb = 'mongodb+srv://mongo_db_user:<Password>@cluster0.5qiqpdd.mongodb.net/sample_db?retryWrites=true&w=majority'
 
 const user_schema = require('./models/user-schema');
 
