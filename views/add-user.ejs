@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+<body>
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+
+    <%- include('./partials/nav') %>
+    
+    <div class="container">
+
+        <div class="row">
+            <form class="col s12" action="/save-user" method="POST">
+              <div class="row">
+                <div class="input-field col s4">
+                  <input id="first_name" type="text" class="validate" name="first_name">
+                  <label for="first_name">First Name</label>
+                </div>
+                <div class="input-field col s4">
+                  <input id="last_name" type="text" class="validate" name="last_name">
+                  <label for="last_name">Last Name</label>
+                </div>
+                <div class="input-field col s4">
+                    <input id="first_name" type="email" class="validate" name="email">
+                    <label for="first_name">Email</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <h6>Gender</h6>
+                <div class="input-field col 12">
+                    <p>
+                        <label>
+                          <input name="gender" type="radio" value="male"/>
+                          <span>Male</span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                          <input name="gender" type="radio" value="female"/>
+                          <span>Female</span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                          <input name="gender" type="radio" value="other" />
+                          <span>Other</span>
+                        </label>
+                      </p>
+                </div>
+                
+              </div>
+
+              <!-- <div class="row">
+                <h6>Hobbies</h6>
+                <div class="input-field col 12">
+                    <p>
+                        <label>
+                          <input type="checkbox" name="hobbies[]" value="cricket"/>
+                          <span>Cricket</span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                          <input type="checkbox" name="hobbies[]" value="football"/>
+                          <span>Football</span>
+                        </label>
+                      </p>
+                      <p>
+                        <label>
+                          <input type="checkbox" name="hobbies[]" value="other"/>
+                          <span>Other</span>
+                        </label>
+                      </p>
+                      <p>
+                </div> -->
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select name="city">
+                          <option value="" disabled selected>Choose your option</option>
+                          <option value="mumbai">Mumbai</option>
+                          <option value="pune">Pune</option>
+                          <option value="delhi">Delhi</option>
+                        </select>
+                        <label>City</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                      <textarea id="about_your_self" name="about_your_self" class="materialize-textarea"></textarea>
+                      <label for="textarea1">Something about your self</label>
+                    </div>
+                </div>
+
+                
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+
+                <button class="btn waves-effect waves-light" type="reset" name="action">Reset </button>
+        
+                
+              </div>
+              
+
+            </form>
+          </div>
+
+
+    </div>
+
+    
+
+    <script>
+
+    $(document).ready(function(){
+        $('select').formSelect();
+    });
+
+    </script>
+    
+</body>
+</html>

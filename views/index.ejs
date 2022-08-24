@@ -10,17 +10,37 @@
     <%- include('./partials/nav') %>
 
     <div class="container">
-        <ul class="collection">
-            <% if(items.length > 0) { %>
-                <% items.forEach(element => { %>
-                    <li class="collection-item"><%= element.name %> - <%= element.mob %></li>
-                <% }) %>
 
-                
-            <% } else { %> 
-                <li class="collection-item">No data available</li>
-            <% } %>
-        </ul>
+        <table>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Gender</th>
+              <th>City</th>
+              <th>About</th>
+              <th>Action</th>
+            </tr>
+
+                <% if(data.length > 0) { %>
+                    <% data.forEach(element => { %>
+                        <tr>
+                            <td><%= element.first_name %></td>
+                            <td><%= element.last_name %></td>
+                            <td><%= element.email %></td>
+                            <td><%= element.gender.toUpperCase() %></td>
+                            <td><%= element.city.toUpperCase() %></td>
+                            <td><%= element.about_your_self %></td>
+                            
+                            <td><a href="#"><i class="small material-icons">edit</i></a> <a href="/user-delete/<%= element._id %>"><i class="small material-icons">delete</i></a> <a href="/user-details/<%= element._id %>"><i class="small material-icons">remove_red_eye</i></a> </td>
+                        </tr>
+                        <% }) %>                   
+                <% } else { %> 
+                        <tr><td>No data available</td></tr>
+                <% } %>
+            </tr>
+            
+          </table>
     </div>
     
 </body>
