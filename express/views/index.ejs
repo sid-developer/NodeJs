@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+        
+<body>
+    
+  <%- include('./partials/nav') %>
+
+    <div class="container">
+
+      <ul class="collection with-header">
+
+        <% if(result.length > 0) { %>
+
+        <% result.forEach( item =>{ %> 
+
+        <% const player_id = item._id %>
+
+          <li class="collection-item"><div><%= item.first_name %> <%= item.last_name %><a href="#!" class="secondary-content" onclick="Edit_Player('<%= player_id %>')"><i class="material-icons">edit</i></a><a href="#!" onclick="Delete_Player('<%= player_id %>')" class="secondary-content"><i class="material-icons">delete</i></a></div></li>
+
+        <% }) %>
+        
+        
+        <% } else { %>
+
+         <h6><center>No data available</center></h6> 
+
+        <% }%>
+
+      </ul>
+
+    </div>
+
+    <button data-target="edit_modal" id="cal_modal" class="btn modal-trigger" style="display: none;">Modal</button>
+
+    <!-- Modal Structure -->
+    <div id="edit_modal" class="modal">
+      
+      <div class="modal-content">
+        <div class="row" style="text-align:right;">
+          <button type="button" class="btn" aria-label="Close" onclick="Close_Modal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        
+        <h4>Edit Player</h4>
+        <div class="row">
+          <form class="col s12" id="frm_edit_player">
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+                <input type="text" class="validate" name="first_name" id="edit_first_name">
+                <label for="icon_prefix">First Name</label>
+              </div>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+                <input type="text" class="validate" name="last_name" id="edit_last_name">
+                <label for="icon_prefix">Last Name</label>
+              </div>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">phone</i>
+                <input type="tel" class="validate" name="phone" id="edit_phone">
+                <label for="icon_telephone">Telephone</label>
+              </div>
+            </div>
+            <button class="btn">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <%- include('./partials/footer.ejs') %>
+
+
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+          var elems = document.querySelectorAll('.modal');
+          var instances = M.Modal.init(elems);
+        });
+
+      function Delete_Player(player_id){
+
+        var result = confirm("Are you sure? you want to delete?");
+
+        if(result){
+
+          $.ajax({
+
+            method : "POST",
+            url : "/delete-player",
+            data : {'player_id' : player_id},
+            success : function(str){
+              alert(str);
+              if(str == 200){
+                location.reload();
+              }else{
+                alert('Failed to delete data');
+              }
+            }
+
+          })
+
+        }
+
+      }
+
+      function Edit_Player(player_id){
+
+        //fetch data using player_id
+
+        $.ajax({
+          method : "GET",
+          url : "/get-player-details/"+player_id,
+          dataType : "JSON",
+          success : function(str){
+
+            if(str !='500'){
+
+              $('#edit_first_name').val(str.first_name);
+              $('#edit_last_name').val(str.last_name);
+              $('#edit_phone').val(str.phone);
+
+              $( "#cal_modal" ).trigger( "click" );
+
+            }
+            
+
+          }
+        })
+
+      }
+
+      function Close_Modal(){
+
+        $('#edit_modal').modal('close');
+
+      }
+
+    </script>
+
+    
+          
+</body>
+</html>
