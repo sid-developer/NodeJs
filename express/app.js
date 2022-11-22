@@ -8,7 +8,7 @@ const save_player = require('./models/player_info.js');
 
 app.use(express.urlencoded({extended: true}))
 
-const mongodb_url = "mongodb+srv://mongo_db_user:<Password>@cluster0.5qiqpdd.mongodb.net/sample_data";
+const mongodb_url = "mongodb+srv://mongo_db_user:W85t2FUhQ9hcwBk2@cluster0.5qiqpdd.mongodb.net/sample_data";
 
 app.set('view engine', 'ejs');
 
@@ -24,15 +24,17 @@ mongoose.connect(mongodb_url).then(() => {
 
 app.get('/', function(req, res){
 
-    const getData = [
-        {'first_name' : 'Rohit', 'last_name' : 'Sharma', 'phone' : '9852147896'},
-        {'first_name' : 'Virat', 'last_name' : 'Kohli', 'phone' : '9852158952'},
-        {'first_name' : 'Rishab', 'last_name' : 'Pant', 'phone' : '98521526393'},
-        {'first_name' : 'Dinesh', 'last_name' : 'Kartik', 'phone' : '9852158959'},
-        {'first_name' : 'Jasprit', 'last_name' : 'Bumrah', 'phone' : '9852158882'}
-    ]
+    // const getData = [
+    //     {'first_name' : 'Rohit', 'last_name' : 'Sharma', 'phone' : '9852147896'},
+    //     {'first_name' : 'Virat', 'last_name' : 'Kohli', 'phone' : '9852158952'},
+    //     {'first_name' : 'Rishab', 'last_name' : 'Pant', 'phone' : '98521526393'},
+    //     {'first_name' : 'Dinesh', 'last_name' : 'Kartik', 'phone' : '9852158959'},
+    //     {'first_name' : 'Jasprit', 'last_name' : 'Bumrah', 'phone' : '9852158882'}
+    // ]
 
-    res.render('index', {getData : [] })
+    // res.render('index', {getData : [] })
+
+    res.redirect('./get-players');
 })
 
 app.get('/add', function(req, res){
@@ -107,6 +109,16 @@ app.get('/get-player-details/:player_id', (req, res) =>{
         res.json(result);
     }).catch( (error) =>{
         res.send('500')
+    })
+
+})
+
+app.put('/update-player-data', (req, res) => {
+
+    save_player.findByIdAndUpdate(req.body._id, req.body).then( (result) =>{
+        res.send('{"res_code" : "200", "res_msg" : "success"}')
+    }).catch((err) =>{
+        res.send(err)
     })
 
 })

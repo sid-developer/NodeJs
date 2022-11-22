@@ -53,6 +53,7 @@
               <div class="input-field col s12">
                 <i class="material-icons prefix">account_circle</i>
                 <input type="text" class="validate" name="first_name" id="edit_first_name">
+                <input type="hidden" name="edit_id" id="edit_id">
                 <label for="icon_prefix">First Name</label>
               </div>
               <div class="input-field col s12">
@@ -123,7 +124,7 @@
               $('#edit_first_name').val(str.first_name);
               $('#edit_last_name').val(str.last_name);
               $('#edit_phone').val(str.phone);
-
+              $('#edit_id').val(player_id);
               $( "#cal_modal" ).trigger( "click" );
 
             }
@@ -139,6 +140,34 @@
         $('#edit_modal').modal('close');
 
       }
+
+      $('#frm_edit_player').submit(function(e){
+        e.preventDefault();
+
+        let id = $('#edit_id').val();
+        let first_name = $("#edit_first_name").val();
+        let last_name = $("#edit_last_name").val();
+        let phone = $("#edit_phone").val();
+
+        $.ajax({
+          method : "PUT",
+          url : "/update-player-data",
+          data : {'first_name' : first_name, 'last_name' : last_name, 'phone' : phone, '_id' : id},
+          dataType : 'JSON',
+          success : function (str){
+
+            if(str.res_code == 200){
+              alert('Updated successfully');
+              location.href = '/get-players';
+            }else{
+              alert('Failed to update');
+              location.reload();
+            }
+
+          }
+        })
+
+      });
 
     </script>
 
