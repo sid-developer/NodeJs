@@ -8,7 +8,7 @@ const save_player = require('./models/player_info.js');
 
 app.use(express.urlencoded({extended: true}))
 
-const mongodb_url = "mongodb+srv://mongo_db_user:W85t2FUhQ9hcwBk2@cluster0.5qiqpdd.mongodb.net/sample_data";
+const mongodb_url = "mongodb+srv://mongo_db_user:<PASSWORD>@cluster0.5qiqpdd.mongodb.net/sample_data";
 
 app.set('view engine', 'ejs');
 
